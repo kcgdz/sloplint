@@ -1,6 +1,6 @@
 {
   "name": "@kcgdz/sloplint",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Catch the phrases that make writing read like unedited AI output. Offline, deterministic, with a shareable slop score.",
   "license": "MIT",
   "author": "kcgdz",

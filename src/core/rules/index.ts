@@ -5,6 +5,8 @@ import { hedge } from './hedge.js';
 import { opener } from './opener.js';
 import { structure } from './structure.js';
 import { vocab } from './vocab.js';
+import { turkish } from './turkish.js';
+import { languages } from './languages.js';
 import type { Category, Rule } from '../types.js';
 
 export const CATEGORIES: { id: Category; title: string; description: string }[] = [
@@ -45,6 +47,8 @@ export const rules: Rule[] = [
   ...hedge,
   ...closer,
   ...filler,
+  ...turkish,
+  ...languages,
 ];
 
 export const rulesById: ReadonlyMap<string, Rule> = new Map(rules.map((r) => [r.id, r]));

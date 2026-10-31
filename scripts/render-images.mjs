@@ -194,26 +194,35 @@ shoot(
     1280,
     640,
     `
-    body { padding: 72px 80px; display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
-    .brand h1 { margin: 0; font-size: 132px; font-weight: 800; letter-spacing: -0.055em; line-height: 0.9; }
-    .brand h1 .hl { background: linear-gradient(transparent 38%, #ffe45c 38%, #ffe45c 86%, transparent 86%); padding: 0 0.04em; margin-left: -0.04em; }
-    .brand p { margin: 28px 0 0; font-size: 34px; line-height: 1.22; font-weight: 600; letter-spacing: -0.015em; max-width: 15ch; }
-    .brand code { display: inline-block; margin-top: 34px; font: 600 24px ui-monospace, Consolas, monospace; color: #5b6573; }
-    .card { padding: 34px 38px 38px; }
-    .card .score { line-height: 0.9; color: ${BAND[sampleResult.label]}; }
-    .card .num { font-size: 120px; font-weight: 800; letter-spacing: -0.06em; }
-    .card .max { font-size: 30px; font-weight: 600; color: #5b6573; margin-left: 6px; letter-spacing: 0; }
-    .card .label { display: block; margin: 10px 0 24px; font-size: 30px; font-weight: 600; }
-    .card .text { font-size: 27px; line-height: 1.55; }
+    body { padding: 42px 56px; background: #12161c; color: #e6eaf0; }
+    header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 38px; }
+    .wordmark { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; }
+    .wordmark .hl { color: #18202b; background: linear-gradient(transparent 18%, #e8c62e 18%, #e8c62e 88%, transparent 88%); }
+    .url { font-size: 22px; color: #9aa4b1; }
+    main { display: grid; grid-template-columns: 740px 1fr; gap: 48px; }
+    h1 { margin: 0 0 26px; font-size: 49px; line-height: 1.08; font-weight: 800; letter-spacing: -0.03em; max-width: 24ch; }
+    .draft { background: #1a2029; border: 1px solid #2c3540; border-radius: 6px; padding: 26px 30px; }
+    .text { font-size: 29px; line-height: 1.52; }
+    mark.m-warning { background: none; box-shadow: inset 0 -0.22em 0 #e8c62e80; }
+    .result { padding-top: 7px; }
+    .score { line-height: 0.95; color: #ff6b9e; }
+    .num { font-size: 136px; font-weight: 800; letter-spacing: -0.04em; }
+    .max { font-size: 32px; font-weight: 600; color: #9aa4b1; margin-left: 4px; }
+    .label { display: block; margin: 14px 0 28px; font-size: 30px; font-weight: 600; }
+    .scale { display: grid; grid-template-columns: 15fr 25fr 30fr 30fr; gap: 3px; height: 8px; }
+    .scale span:nth-child(1) { background: #4cc69c55; }
+    .scale span:nth-child(2) { background: #b5c94a55; }
+    .scale span:nth-child(3) { background: #f0a43c55; }
+    .scale span:nth-child(4) { background: #ff6b9e; }
+    .details { color: #9aa4b1; font-size: 22px; margin: 18px 0; }
+    footer { position: absolute; bottom: 38px; left: 56px; right: 56px; display: flex; justify-content: space-between; border-top: 1px solid #2c3540; padding-top: 20px; font-size: 20px; color: #9aa4b1; }
+    footer code { font-size: 19px; }
   `,
-    `<div class="brand">
-      <h1><span class="hl">slop</span>lint</h1>
-      <p>Catch the phrases that make writing read like AI output.</p>
-      <code>npx @kcgdz/sloplint README.md</code>
-    </div>
-    <div class="sheet card">
-      <div class="score"><span class="num">${sampleResult.score}</span><span class="max">/100</span><span class="label">${sampleResult.label}</span></div>
-      <div class="text">${marked(sample)}</div>
-    </div>`,
+    `<header><div class="wordmark"><span class="hl">slop</span>lint</div><span class="url">kcgdz.github.io/sloplint</span></header>
+    <main>
+      <section><h1>Paste a draft. See what reads like AI slop.</h1><div class="draft text">${marked(sample)}</div></section>
+      <section class="result"><div class="score"><span class="num">${sampleResult.score}</span><span class="max">/100</span><span class="label">${sampleResult.label}</span></div><div class="scale"><span></span><span></span><span></span><span></span></div><p class="details">${sampleResult.words} words, ${sampleResult.findings.length} findings</p></section>
+    </main>
+    <footer><span>Runs in your browser. Your text stays with you.</span><code>npx @kcgdz/sloplint README.md</code></footer>`,
   ),
 );

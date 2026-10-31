@@ -64,7 +64,7 @@
         <div class="draft-intro">
           <h1 id="draft-title">Paste a draft. See what reads like AI slop.</h1>
           <p>
-            The same <span id="rule-count">39</span> rules as the sloplint CLI, running in your
+            The same <span id="rule-count">93</span> rules as the sloplint CLI, running in your
             browser. Your text is not uploaded anywhere.
           </p>
         </div>
@@ -80,15 +80,20 @@
         </div>
 
         <div class="sheet">
+          <div class="editor-heading">
+            <label for="input">Your draft</label>
+            <span id="editor-instruction"
+              >Paste or type your text below. Results update as you write.</span
+            >
+          </div>
           <div class="editor">
             <div id="backdrop" class="editor-layer editor-backdrop" aria-hidden="true"></div>
             <textarea
               id="input"
               class="editor-layer editor-input"
               spellcheck="false"
-              aria-label="Text to check"
-              aria-describedby="draft-hint"
-              placeholder="Paste a README, a post, an email or a commit message."
+              aria-describedby="editor-instruction draft-hint"
+              placeholder="Paste your text here…&#10;&#10;A README, a post, an email or any draft you want to check."
             ></textarea>
           </div>
         </div>

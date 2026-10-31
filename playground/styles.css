@@ -65,6 +65,12 @@ body {
   font-family: var(--font-ui);
   font-size: 1rem;
   line-height: 1.5;
+  scrollbar-color: var(--graphite) var(--sheet);
+}
+
+::selection {
+  background: var(--mark-info);
+  color: #18202b;
 }
 
 a {
@@ -239,6 +245,26 @@ code {
   border-radius: var(--radius-sheet);
 }
 
+.editor-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  padding: 0.9rem clamp(1rem, 3vw, 2.25rem);
+  border-bottom: 1px solid var(--rule);
+}
+
+.editor-heading label {
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: text;
+}
+
+.editor-heading span {
+  color: var(--graphite);
+  font-size: 0.875rem;
+}
+
 /*
  * The editor is two stacked layers with identical metrics. The backdrop holds
  * the text plus <mark> highlights and sets the height; the transparent
@@ -246,6 +272,8 @@ code {
  */
 .editor {
   position: relative;
+  height: clamp(22rem, 58vh, 40rem);
+  overflow: hidden;
 }
 
 .editor-layer {
@@ -260,10 +288,12 @@ code {
   overflow-wrap: break-word;
   word-break: normal;
   tab-size: 4;
+  scrollbar-gutter: stable;
 }
 
 .editor-backdrop {
-  min-height: 26rem;
+  height: 100%;
+  overflow: hidden;
   color: transparent;
 }
 
@@ -273,14 +303,15 @@ code {
   width: 100%;
   height: 100%;
   resize: none;
-  overflow: hidden;
+  overflow-y: auto;
   background: transparent;
   color: var(--ink);
   caret-color: var(--ink);
 }
 
 .editor-input:focus-visible {
-  outline: none;
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
 }
 
 .sheet:focus-within {
@@ -289,7 +320,7 @@ code {
 
 .editor-input::placeholder {
   color: var(--graphite);
-  font-style: italic;
+  font-style: normal;
 }
 
 .editor-backdrop mark {
@@ -383,7 +414,7 @@ code {
   font-weight: 800;
   font-size: clamp(6rem, 4rem + 6vw, 9.5rem);
   line-height: 0.82;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
   font-variation-settings: 'opsz' 96;
 }
@@ -504,6 +535,11 @@ code {
   pointer-events: none;
 }
 
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 /* ---------------------------------------------------------------- findings */
 
 .findings {
@@ -536,7 +572,7 @@ code {
 
 .finding button {
   display: grid;
-  grid-template-columns: 0.75rem minmax(0, 1fr);
+  grid-template-columns: 0.75rem minmax(0, 1fr) 1rem;
   gap: 0.15rem 0.65rem;
   width: 100%;
   padding: 0.6rem 0.5rem;
@@ -547,6 +583,30 @@ code {
   border: 0;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.finding button::after {
+  content: '';
+  grid-column: 3;
+  grid-row: 1;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-top: 0.5rem;
+  border-right: 1.5px solid var(--graphite);
+  border-bottom: 1.5px solid var(--graphite);
+  transform: rotate(45deg);
+}
+
+.finding.is-active button::after {
+  transform: rotate(225deg);
+}
+
+.finding-title {
+  grid-column: 2;
+}
+
+.finding + .finding {
+  border-top: 1px solid var(--rule);
 }
 
 .finding button:hover {
@@ -592,6 +652,7 @@ code {
   grid-column: 2;
   margin-top: 0.4rem;
   font-size: 0.9375rem;
+  overflow-wrap: anywhere;
 }
 
 .finding-detail p {
@@ -644,6 +705,8 @@ code {
     transform: translateX(-50%);
     box-shadow: 0 6px 24px rgba(10, 16, 24, 0.28);
     transition: opacity 160ms ease;
+    max-width: calc(100% - 2rem);
+    white-space: nowrap;
   }
 
   .score-pill[hidden] {
@@ -675,6 +738,30 @@ code {
 .colophon p {
   margin: 0 0 0.5rem;
   max-width: 70ch;
+}
+
+.colophon code {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .editor {
+    height: 24rem;
+  }
+
+  .example-picker select,
+  .quiet-button,
+  .button {
+    min-height: 2.75rem;
+  }
+
+  .score-number {
+    font-size: 6rem;
+  }
+
+  .colophon {
+    padding-bottom: 6rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

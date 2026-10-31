@@ -97,6 +97,7 @@ function renderBackdrop(text: string, findings: Finding[]): void {
   }
   // A trailing newline in a textarea adds a line; mirror it so heights match.
   backdrop.innerHTML = `${html}\n `;
+  backdrop.scrollTop = input.scrollTop;
 }
 
 function renderScore(result: LintResult | null, text: string): void {
@@ -138,7 +139,8 @@ function renderFindings(result: LintResult | null, text: string): void {
   }
   if (result.findings.length === 0) {
     emptyNote.hidden = false;
-    emptyNote.textContent = 'Nothing flagged. This reads like a person wrote it.';
+    emptyNote.textContent =
+      'No matching patterns found. This score does not determine who wrote the text.';
     return;
   }
   emptyNote.hidden = true;
@@ -191,6 +193,9 @@ function renderFindings(result: LintResult | null, text: string): void {
 
 function update(): void {
   const text = input.value;
+  el('editor-instruction').textContent = EXAMPLES.some((example) => example.text === text)
+    ? 'Example loaded. Clear it to paste your own text, or edit it below.'
+    : 'Paste or type your text below. Results update as you write.';
   current = text.trim() ? lint(text) : null;
   activeIndex = -1;
   renderBackdrop(text, current?.findings ?? []);
@@ -212,10 +217,15 @@ function selectFinding(idx: number, moveCaret: boolean): void {
     if (on && !moveCaret) li.scrollIntoView({ block: 'nearest' });
   }
   if (moveCaret && activeIndex !== -1) {
-    input.focus({ preventScroll: true });
     input.setSelectionRange(f.offset, f.offset + f.length);
     const mark = backdrop.querySelector('.m-active');
-    mark?.scrollIntoView({ block: 'center', behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+    if (mark instanceof HTMLElement) {
+      input.scrollTop +=
+        mark.getBoundingClientRect().top -
+        input.getBoundingClientRect().top -
+        input.clientHeight / 2;
+      backdrop.scrollTop = input.scrollTop;
+    }
   }
 }
 
@@ -226,9 +236,6 @@ function syncCaret(): void {
   const idx = current.findings.findIndex((f) => pos >= f.offset && pos <= f.offset + f.length);
   if (idx !== -1 && idx !== activeIndex) selectFinding(idx, false);
 }
-
-const prefersReducedMotion = (): boolean =>
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ---------------------------------------------------------------- persistence
 
@@ -252,6 +259,7 @@ function loadSaved(): string | null {
 
 let timer: number | undefined;
 input.addEventListener('input', () => {
+  exampleSelect.value = '';
   // Render the plain backdrop immediately so the layers never drift apart.
   backdrop.textContent = `${input.value}\n `;
   window.clearTimeout(timer);
@@ -260,6 +268,9 @@ input.addEventListener('input', () => {
 });
 input.addEventListener('click', syncCaret);
 input.addEventListener('keyup', syncCaret);
+input.addEventListener('scroll', () => {
+  backdrop.scrollTop = input.scrollTop;
+});
 
 for (const ex of EXAMPLES) {
   const option = document.createElement('option');
@@ -271,6 +282,7 @@ exampleSelect.addEventListener('change', () => {
   const ex = EXAMPLES.find((e) => e.id === exampleSelect.value);
   if (!ex) return;
   input.value = ex.text;
+  input.scrollTop = 0;
   history.replaceState(null, '', location.pathname);
   update();
 });
@@ -303,11 +315,12 @@ async function start(): Promise<void> {
   const fromHash = location.hash.length > 1 ? await decodeText(location.hash.slice(1)) : null;
   const saved = loadSaved();
   if (fromHash !== null) input.value = fromHash;
-  else if (saved) input.value = saved;
+  else if (saved !== null) input.value = saved;
   else {
     input.value = EXAMPLES[0]!.text;
     exampleSelect.value = EXAMPLES[0]!.id;
   }
+  exampleSelect.value = EXAMPLES.find((example) => example.text === input.value)?.id ?? '';
   update();
 }
 

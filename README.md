@@ -72,7 +72,23 @@ The skill loads when Claude writes a README, landing page, post, commit message 
 
 ## What it checks
 
-<!-- rules:count -->39<!-- /rules:count --> deterministic rules in seven categories: openers, vocabulary, structure, formatting, hedging, closers and leftovers. Each finding has a rule ID, the exact position, the flagged text, the reason it reads as slop, and a suggested fix. Every rule ships with examples it must flag and examples it must leave alone, and both sets run as tests.
+English, Turkish, Spanish, French, German, Portuguese, Italian, Dutch, Russian and Arabic phrases are checked together, including mixed-language documents; no language flag is needed. Each additional language starts with six phrase rules for stock openings, empty hype, emphasis fillers, template endings, engagement bait and assistant leftovers. These findings include explanations and rewrite advice in the phrase's language. English has broader coverage; the additional languages have initial phrase catalogs, not grammar checkers. Score labels and general CLI messages remain in English.
+
+| Language | Example phrase | Rule prefix |
+| --- | --- | --- |
+| Turkish | Günümüzün dijital çağında | `tr-` |
+| Spanish | En la era digital actual | `es-` |
+| French | À l'ère numérique actuelle | `fr-` |
+| German | In der heutigen schnelllebigen Welt | `de-` |
+| Portuguese | No mundo acelerado de hoje | `pt-` |
+| Italian | Nel mondo frenetico di oggi | `it-` |
+| Dutch | In het huidige digitale tijdperk | `nl-` |
+| Russian | В современном быстро меняющемся мире | `ru-` |
+| Arabic | في عالم اليوم سريع التغير | `ar-` |
+
+Configure these rules by their full IDs, for example `hedge/es-worth-noting` or `opener/tr-stock-opening`, using the same rule settings as English rules. Accents are significant; apostrophes may be straight or curly. Arabic patterns currently match unvocalized Modern Standard Arabic; dialects, vowel marks and spelling variants are not normalized. Reported columns use UTF-16 source order, including in right-to-left text.
+
+<!-- rules:count -->93<!-- /rules:count --> deterministic rules in seven categories: openers, vocabulary, structure, formatting, hedging, closers and leftovers. Each finding has a rule ID, the exact position, the flagged text, the reason it reads as slop, and a suggested fix. Every rule ships with examples it must flag and examples it must leave alone, and both sets run as tests.
 
 sloplint does not call a model and does not need a network connection. It skips code blocks, inline code, blockquotes, URLs, link targets, HTML and frontmatter, so quoting slop to talk about it is fine.
 
@@ -88,6 +104,15 @@ sloplint does not call a model and does not need a network connection. It skips 
 | `opener/rhetorical-hook` | warning | "Have you ever wondered…?" |
 | `opener/chatbot-preamble` | error | "Certainly! Here's…" |
 | `opener/hope-finds-you-well` | warning | "I hope this email finds you well" |
+| `opener/tr-stock-opening` | warning | Konudan önce gelen genel giriş |
+| `opener/it-stock-opening` | warning | nel mondo frenetico di oggi |
+| `opener/nl-stock-opening` | warning | in de snel veranderende wereld van vandaag |
+| `opener/ru-stock-opening` | warning | в современном быстро меняющемся мире |
+| `opener/ar-stock-opening` | warning | في عالم اليوم سريع التغير |
+| `opener/es-stock-opening` | warning | en el vertiginoso mundo actual |
+| `opener/fr-stock-opening` | warning | dans le monde en constante évolution d'aujourd'hui |
+| `opener/de-stock-opening` | warning | in der heutigen schnelllebigen Welt |
+| `opener/pt-stock-opening` | warning | no mundo acelerado de hoje |
 | `vocab/delve` | warning | "Delve" |
 | `vocab/tapestry` | warning | Ornamental metaphors ("tapestry", "testament") |
 | `vocab/hype-adjectives` | warning | Hype adjectives ("seamless", "cutting-edge") |
@@ -98,6 +123,15 @@ sloplint does not call a model and does not need a network connection. It skips 
 | `vocab/gravitas` | info | Gravitas words ("pivotal", "crucial", "meticulous") |
 | `vocab/intensifiers` | info | Stacked intensifiers ("truly", "incredibly") |
 | `vocab/corporate-speak` | warning | Corporate jargon ("synergy", "actionable insights") |
+| `vocab/tr-empty-hype` | warning | Somut bilgi vermeyen pazarlama kalıbı |
+| `vocab/it-empty-hype` | warning | sblocca tutto il tuo potenziale |
+| `vocab/nl-empty-hype` | warning | ontgrendel je volledige potentieel |
+| `vocab/ru-empty-hype` | warning | раскройте весь свой потенциал |
+| `vocab/ar-empty-hype` | warning | أطلق العنان لإمكاناتك |
+| `vocab/es-empty-hype` | warning | desbloquea todo tu potencial |
+| `vocab/fr-empty-hype` | warning | libérez tout votre potentiel |
+| `vocab/de-empty-hype` | warning | entfesseln Sie Ihr volles Potenzial |
+| `vocab/pt-empty-hype` | warning | desbloqueie todo o seu potencial |
 | `structure/not-just-x` | warning | "It's not just X, it's Y" |
 | `structure/rule-of-three` | info | Everything in threes |
 | `structure/colon-reveal` | warning | "The result? …" |
@@ -115,11 +149,47 @@ sloplint does not call a model and does not need a network connection. It skips 
 | `hedge/stacked` | warning | Stacked hedges ("may potentially") |
 | `hedge/worth-noting` | warning | "It's worth noting that" |
 | `hedge/qualifier-density` | info | Qualifier pile-up |
+| `hedge/tr-worth-noting` | warning | Bilgiyi geciktiren vurgu kalıbı |
+| `hedge/it-worth-noting` | warning | è importante sottolineare che |
+| `hedge/nl-worth-noting` | warning | het is belangrijk om op te merken dat |
+| `hedge/ru-worth-noting` | warning | важно отметить, что |
+| `hedge/ar-worth-noting` | warning | من الجدير بالذكر أن |
+| `hedge/es-worth-noting` | warning | cabe destacar que |
+| `hedge/fr-worth-noting` | warning | il est important de noter que |
+| `hedge/de-worth-noting` | warning | es ist wichtig zu beachten, dass |
+| `hedge/pt-worth-noting` | warning | é importante ressaltar que |
 | `closer/in-conclusion` | warning | "In conclusion" |
 | `closer/engagement-bait` | warning | "What do you think? Let me know in the comments" |
 | `closer/hope-this-helps` | warning | "Hope this helps! Feel free to reach out" |
 | `closer/future-is-bright` | warning | "The future is bright" |
+| `closer/tr-template-ending` | warning | İçeriğe katkı yapmayan kapanış |
+| `closer/tr-engagement-bait` | warning | Genel etkileşim çağrısı |
+| `closer/it-template-ending` | warning | spero che queste informazioni ti siano state utili |
+| `closer/it-engagement-bait` | warning | condividi i tuoi pensieri nei commenti |
+| `closer/nl-template-ending` | warning | ik hoop dat deze informatie nuttig voor je was |
+| `closer/nl-engagement-bait` | warning | deel je gedachten in de reacties |
+| `closer/ru-template-ending` | warning | надеюсь, эта информация была вам полезна |
+| `closer/ru-engagement-bait` | warning | поделитесь своими мыслями в комментариях |
+| `closer/ar-template-ending` | warning | آمل أن تكون هذه المعلومات مفيدة لك |
+| `closer/ar-engagement-bait` | warning | شاركنا أفكارك في التعليقات |
+| `closer/es-template-ending` | warning | espero que esta información te haya sido útil |
+| `closer/es-engagement-bait` | warning | comparte tus pensamientos en los comentarios |
+| `closer/fr-template-ending` | warning | j'espère que ces informations vous seront utiles |
+| `closer/fr-engagement-bait` | warning | partagez vos réflexions dans les commentaires |
+| `closer/de-template-ending` | warning | ich hoffe, diese Informationen waren hilfreich |
+| `closer/de-engagement-bait` | warning | teilen Sie Ihre Gedanken in den Kommentaren |
+| `closer/pt-template-ending` | warning | espero que estas informações tenham sido úteis |
+| `closer/pt-engagement-bait` | warning | compartilhe seus pensamentos nos comentários |
 | `filler/ai-self-reference` | error | Leftover assistant text and placeholders |
+| `filler/tr-assistant-preamble` | error | Metinde kalmış asistan açıklaması |
+| `filler/it-assistant-preamble` | error | come modello linguistico di intelligenza artificiale |
+| `filler/nl-assistant-preamble` | error | als AI-taalmodel kan ik |
+| `filler/ru-assistant-preamble` | error | как языковая модель искусственного интеллекта |
+| `filler/ar-assistant-preamble` | error | بصفتي نموذج لغة للذكاء الاصطناعي |
+| `filler/es-assistant-preamble` | error | como modelo de lenguaje de inteligencia artificial |
+| `filler/fr-assistant-preamble` | error | en tant que modèle de langage d'intelligence artificielle |
+| `filler/de-assistant-preamble` | error | als KI-Sprachmodell |
+| `filler/pt-assistant-preamble` | error | como modelo de linguagem de inteligência artificial |
 
 <!-- sloplint-enable -->
 <!-- rules:end -->

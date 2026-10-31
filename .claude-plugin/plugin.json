@@ -1,7 +1,7 @@
 {
   "name": "sloplint",
   "displayName": "sloplint",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Writing guidance that keeps AI-slop patterns out of READMEs, landing pages, social posts, commit messages, blog posts and emails, with a CLI self-check.",
   "author": {
     "name": "kcgdz",

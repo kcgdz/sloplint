@@ -3,7 +3,7 @@
 
 # Pattern checklist
 
-Every rule the sloplint CLI checks (39 in total), grouped by category. Each entry says what to look for, why readers react to it, and how to fix it. Severity is the CLI default: `error` and `warning` should be fixed, `info` is a prompt to reread.
+Every rule the sloplint CLI checks (93 in total), grouped by category. Each entry says what to look for, why readers react to it, and how to fix it. Severity is the CLI default: `error` and `warning` should be fixed, `info` is a prompt to reread.
 
 ## Openers
 
@@ -71,6 +71,87 @@ Stock first lines that delay the point.
 - Fix: Open with the reason you are writing.
 - Flagged: `I hope this email finds you well.`, `Just circling back on my last note.`, `I wanted to reach out about your hiring plans.`, `Hope you're doing well!`
 - Not flagged: `The well was dry.`, `We reached out to three vendors and two replied.`, `Following up on Tuesday's call: the contract is attached.`
+
+### opener/tr-stock-opening
+
+Konudan önce gelen genel giriş. Default: `warning`.
+
+- Why: Konudan önce gelen genel giriş. Bu ifade, somut bilgi yerine hazır bir anlatım kalıbı kullanıyor.
+- Fix: Kalıbı kaldırın; yerine somut bilgiyi, sonucu veya yapılacak işi yazın.
+- Flagged: `Günümüzün hızla değişen dünyasında araçlar önemlidir.`, `Günümüzün dijital çağında veriler değerlidir.`
+- Not flagged: `Bugün giriş hatasını düzelttik.`, `Dijital çağ arşivin adıdır.`, `Teknoloji bütçesi yüzde beş arttı.`
+
+### opener/it-stock-opening
+
+nel mondo frenetico di oggi. Default: `warning`.
+
+- Why: Questa formula generica ritarda i fatti e potrebbe comparire in un testo su qualsiasi argomento.
+- Fix: Elimina la formula e indica il fatto, il risultato o la prossima azione concreta.
+- Flagged: `nel mondo frenetico di oggi.`, `nell'era digitale odierna.`
+- Not flagged: `Abbiamo corretto il problema di accesso.`, `Il file occupa due megabyte.`, `Il modello funziona senza rete.`
+
+### opener/nl-stock-opening
+
+in de snel veranderende wereld van vandaag. Default: `warning`.
+
+- Why: Deze algemene formulering stelt concrete informatie uit en past bij vrijwel ieder onderwerp.
+- Fix: Schrap de formulering en noem het concrete feit, resultaat of de volgende stap.
+- Flagged: `in de snel veranderende wereld van vandaag.`, `in het huidige digitale tijdperk.`
+- Not flagged: `We hebben de inlogfout verholpen.`, `Het bestand is twee megabyte groot.`, `Het model werkt zonder netwerk.`
+
+### opener/ru-stock-opening
+
+в современном быстро меняющемся мире. Default: `warning`.
+
+- Why: Этот шаблонный оборот откладывает конкретную информацию и подходит почти к любой теме.
+- Fix: Уберите шаблон и укажите конкретный факт, результат или следующее действие.
+- Flagged: `в современном быстро меняющемся мире.`, `в эпоху цифровых технологий.`
+- Not flagged: `Мы исправили ошибку входа.`, `Размер файла — два мегабайта.`, `Модель работает без сети.`
+
+### opener/ar-stock-opening
+
+في عالم اليوم سريع التغير. Default: `warning`.
+
+- Why: هذه عبارة عامة تؤخر المعلومة المحددة ويمكن استخدامها في نص عن أي موضوع تقريبا.
+- Fix: احذف العبارة واذكر المعلومة المحددة أو النتيجة أو الخطوة التالية.
+- Flagged: `في عالم اليوم سريع التغير.`, `في عصرنا الرقمي المتسارع.`
+- Not flagged: `أصلحنا خطأ تسجيل الدخول.`, `حجم الملف اثنان ميغابايت.`, `يعمل النموذج دون اتصال بالشبكة.`
+
+### opener/es-stock-opening
+
+en el vertiginoso mundo actual. Default: `warning`.
+
+- Why: Esta fórmula genérica retrasa la información concreta y puede aparecer en textos sobre cualquier tema.
+- Fix: Elimina la fórmula y escribe el dato, el resultado o la acción concreta.
+- Flagged: `en el vertiginoso mundo actual.`, `en la era digital actual.`
+- Not flagged: `Hoy corregimos el error de acceso.`, `El archivo ocupa dos megabytes.`, `El modelo funciona sin conexión.`
+
+### opener/fr-stock-opening
+
+dans le monde en constante évolution d'aujourd'hui. Default: `warning`.
+
+- Why: Cette formule générique retarde les faits et pourrait figurer dans un texte sur presque tous les sujets.
+- Fix: Supprimez la formule et indiquez le fait, le résultat ou la prochaine action.
+- Flagged: `dans le monde en constante évolution d'aujourd'hui.`, `à l'ère numérique actuelle.`
+- Not flagged: `Nous avons corrigé l’erreur de connexion.`, `Le fichier mesure deux mégaoctets.`, `Le modèle fonctionne sans connexion.`
+
+### opener/de-stock-opening
+
+in der heutigen schnelllebigen Welt. Default: `warning`.
+
+- Why: Diese allgemeine Floskel verzögert die konkrete Information und passt zu fast jedem beliebigen Thema.
+- Fix: Streichen Sie die Floskel und nennen Sie die konkrete Information, das Ergebnis oder den nächsten Schritt.
+- Flagged: `in der heutigen schnelllebigen Welt.`, `im heutigen digitalen Zeitalter.`
+- Not flagged: `Wir haben den Anmeldefehler behoben.`, `Die Datei ist zwei Megabyte groß.`, `Das Modell arbeitet ohne Netzwerk.`
+
+### opener/pt-stock-opening
+
+no mundo acelerado de hoje. Default: `warning`.
+
+- Why: Esta fórmula genérica adia a informação concreta e poderia aparecer em textos sobre qualquer assunto.
+- Fix: Remova a fórmula e apresente o dado, o resultado ou a ação concreta.
+- Flagged: `no mundo acelerado de hoje.`, `na era digital em que vivemos.`
+- Not flagged: `Corrigimos o erro de acesso hoje.`, `O arquivo ocupa dois megabytes.`, `O modelo funciona sem conexão.`
 
 ## Vocabulary
 
@@ -165,6 +246,87 @@ Corporate jargon ("synergy", "actionable insights"). Default: `warning`.
 - Fix: Say what the reader gets: "a weekly CSV of failed jobs", not "actionable insights".
 - Flagged: `We drive synergy across teams.`, `Get actionable insights from your data.`, `A holistic, best-in-class platform.`
 - Not flagged: `Read the logs for insight into the crash.`, `The fruit tree is low.`, `Our CI runs end-to-end tests.`
+
+### vocab/tr-empty-hype
+
+Somut bilgi vermeyen pazarlama kalıbı. Default: `warning`.
+
+- Why: Somut bilgi vermeyen pazarlama kalıbı. Bu ifade, somut bilgi yerine hazır bir anlatım kalıbı kullanıyor.
+- Fix: Kalıbı kaldırın; yerine somut bilgiyi, sonucu veya yapılacak işi yazın.
+- Flagged: `Potansiyelinizi açığa çıkarın ve başlayın.`, `Oyunun kurallarını değiştiren bir çözüm.`
+- Not flagged: `Oyun kurallarını menüden okuyun.`, `Dosyaları iki saniyede sıkıştırır.`, `Deneyim süresi on dakikadır.`
+
+### vocab/it-empty-hype
+
+sblocca tutto il tuo potenziale. Default: `warning`.
+
+- Why: Questa formula generica ritarda i fatti e potrebbe comparire in un testo su qualsiasi argomento.
+- Fix: Elimina la formula e indica il fatto, il risultato o la prossima azione concreta.
+- Flagged: `sblocca tutto il tuo potenziale.`, `porta la tua attività al livello successivo.`
+- Not flagged: `Abbiamo corretto il problema di accesso.`, `Il file occupa due megabyte.`, `Il modello funziona senza rete.`
+
+### vocab/nl-empty-hype
+
+ontgrendel je volledige potentieel. Default: `warning`.
+
+- Why: Deze algemene formulering stelt concrete informatie uit en past bij vrijwel ieder onderwerp.
+- Fix: Schrap de formulering en noem het concrete feit, resultaat of de volgende stap.
+- Flagged: `ontgrendel je volledige potentieel.`, `til je bedrijf naar een hoger niveau.`
+- Not flagged: `We hebben de inlogfout verholpen.`, `Het bestand is twee megabyte groot.`, `Het model werkt zonder netwerk.`
+
+### vocab/ru-empty-hype
+
+раскройте весь свой потенциал. Default: `warning`.
+
+- Why: Этот шаблонный оборот откладывает конкретную информацию и подходит почти к любой теме.
+- Fix: Уберите шаблон и укажите конкретный факт, результат или следующее действие.
+- Flagged: `раскройте весь свой потенциал.`, `выведите свой бизнес на новый уровень.`
+- Not flagged: `Мы исправили ошибку входа.`, `Размер файла — два мегабайта.`, `Модель работает без сети.`
+
+### vocab/ar-empty-hype
+
+أطلق العنان لإمكاناتك. Default: `warning`.
+
+- Why: هذه عبارة عامة تؤخر المعلومة المحددة ويمكن استخدامها في نص عن أي موضوع تقريبا.
+- Fix: احذف العبارة واذكر المعلومة المحددة أو النتيجة أو الخطوة التالية.
+- Flagged: `أطلق العنان لإمكاناتك.`, `ارتق بأعمالك إلى المستوى التالي.`
+- Not flagged: `أصلحنا خطأ تسجيل الدخول.`, `حجم الملف اثنان ميغابايت.`, `يعمل النموذج دون اتصال بالشبكة.`
+
+### vocab/es-empty-hype
+
+desbloquea todo tu potencial. Default: `warning`.
+
+- Why: Esta fórmula genérica retrasa la información concreta y puede aparecer en textos sobre cualquier tema.
+- Fix: Elimina la fórmula y escribe el dato, el resultado o la acción concreta.
+- Flagged: `desbloquea todo tu potencial.`, `lleva tu negocio al siguiente nivel.`
+- Not flagged: `Hoy corregimos el error de acceso.`, `El archivo ocupa dos megabytes.`, `El modelo funciona sin conexión.`
+
+### vocab/fr-empty-hype
+
+libérez tout votre potentiel. Default: `warning`.
+
+- Why: Cette formule générique retarde les faits et pourrait figurer dans un texte sur presque tous les sujets.
+- Fix: Supprimez la formule et indiquez le fait, le résultat ou la prochaine action.
+- Flagged: `libérez tout votre potentiel.`, `propulsez votre entreprise vers de nouveaux sommets.`
+- Not flagged: `Nous avons corrigé l’erreur de connexion.`, `Le fichier mesure deux mégaoctets.`, `Le modèle fonctionne sans connexion.`
+
+### vocab/de-empty-hype
+
+entfesseln Sie Ihr volles Potenzial. Default: `warning`.
+
+- Why: Diese allgemeine Floskel verzögert die konkrete Information und passt zu fast jedem beliebigen Thema.
+- Fix: Streichen Sie die Floskel und nennen Sie die konkrete Information, das Ergebnis oder den nächsten Schritt.
+- Flagged: `entfesseln Sie Ihr volles Potenzial.`, `heben Sie Ihr Unternehmen auf das nächste Level.`
+- Not flagged: `Wir haben den Anmeldefehler behoben.`, `Die Datei ist zwei Megabyte groß.`, `Das Modell arbeitet ohne Netzwerk.`
+
+### vocab/pt-empty-hype
+
+desbloqueie todo o seu potencial. Default: `warning`.
+
+- Why: Esta fórmula genérica adia a informação concreta e poderia aparecer em textos sobre qualquer assunto.
+- Fix: Remova a fórmula e apresente o dado, o resultado ou a ação concreta.
+- Flagged: `desbloqueie todo o seu potencial.`, `leve seu negócio para o próximo nível.`
+- Not flagged: `Corrigimos o erro de acesso hoje.`, `O arquivo ocupa dois megabytes.`, `O modelo funciona sem conexão.`
 
 ## Structure
 
@@ -331,6 +493,87 @@ Qualifier pile-up. Default: `info`.
 - Flagged: `Generally, it is somewhat faster and arguably, in many cases, relatively stable.`, `It typically works and is potentially, to some extent, more or less reliable.`
 - Not flagged: `It is generally faster.`, `Builds typically take 2 minutes, and caching tends to help.`, `It is faster on every benchmark we ran.`
 
+### hedge/tr-worth-noting
+
+Bilgiyi geciktiren vurgu kalıbı. Default: `warning`.
+
+- Why: Bilgiyi geciktiren vurgu kalıbı. Bu ifade, somut bilgi yerine hazır bir anlatım kalıbı kullanıyor.
+- Fix: Kalıbı kaldırın; yerine somut bilgiyi, sonucu veya yapılacak işi yazın.
+- Flagged: `Belirtmekte fayda var, işlem ücretsiz.`, `Altını çizmek gerekir: dosya silinmez.`
+- Not flagged: `İşlem ücretsizdir.`, `Satırın altını çizmek için düğmeye basın.`, `Dosya diskte kalır.`
+
+### hedge/it-worth-noting
+
+è importante sottolineare che. Default: `warning`.
+
+- Why: Questa formula generica ritarda i fatti e potrebbe comparire in un testo su qualsiasi argomento.
+- Fix: Elimina la formula e indica il fatto, il risultato o la prossima azione concreta.
+- Flagged: `è importante sottolineare che.`, `vale la pena notare che.`
+- Not flagged: `Abbiamo corretto il problema di accesso.`, `Il file occupa due megabyte.`, `Il modello funziona senza rete.`
+
+### hedge/nl-worth-noting
+
+het is belangrijk om op te merken dat. Default: `warning`.
+
+- Why: Deze algemene formulering stelt concrete informatie uit en past bij vrijwel ieder onderwerp.
+- Fix: Schrap de formulering en noem het concrete feit, resultaat of de volgende stap.
+- Flagged: `het is belangrijk om op te merken dat.`, `het is vermeldenswaard dat.`
+- Not flagged: `We hebben de inlogfout verholpen.`, `Het bestand is twee megabyte groot.`, `Het model werkt zonder netwerk.`
+
+### hedge/ru-worth-noting
+
+важно отметить, что. Default: `warning`.
+
+- Why: Этот шаблонный оборот откладывает конкретную информацию и подходит почти к любой теме.
+- Fix: Уберите шаблон и укажите конкретный факт, результат или следующее действие.
+- Flagged: `важно отметить, что.`, `стоит подчеркнуть, что.`
+- Not flagged: `Мы исправили ошибку входа.`, `Размер файла — два мегабайта.`, `Модель работает без сети.`
+
+### hedge/ar-worth-noting
+
+من الجدير بالذكر أن. Default: `warning`.
+
+- Why: هذه عبارة عامة تؤخر المعلومة المحددة ويمكن استخدامها في نص عن أي موضوع تقريبا.
+- Fix: احذف العبارة واذكر المعلومة المحددة أو النتيجة أو الخطوة التالية.
+- Flagged: `من الجدير بالذكر أن.`, `تجدر الإشارة إلى أن.`
+- Not flagged: `أصلحنا خطأ تسجيل الدخول.`, `حجم الملف اثنان ميغابايت.`, `يعمل النموذج دون اتصال بالشبكة.`
+
+### hedge/es-worth-noting
+
+cabe destacar que. Default: `warning`.
+
+- Why: Esta fórmula genérica retrasa la información concreta y puede aparecer en textos sobre cualquier tema.
+- Fix: Elimina la fórmula y escribe el dato, el resultado o la acción concreta.
+- Flagged: `cabe destacar que.`, `es importante señalar que.`
+- Not flagged: `Hoy corregimos el error de acceso.`, `El archivo ocupa dos megabytes.`, `El modelo funciona sin conexión.`
+
+### hedge/fr-worth-noting
+
+il est important de noter que. Default: `warning`.
+
+- Why: Cette formule générique retarde les faits et pourrait figurer dans un texte sur presque tous les sujets.
+- Fix: Supprimez la formule et indiquez le fait, le résultat ou la prochaine action.
+- Flagged: `il est important de noter que.`, `il convient de souligner que.`
+- Not flagged: `Nous avons corrigé l’erreur de connexion.`, `Le fichier mesure deux mégaoctets.`, `Le modèle fonctionne sans connexion.`
+
+### hedge/de-worth-noting
+
+es ist wichtig zu beachten, dass. Default: `warning`.
+
+- Why: Diese allgemeine Floskel verzögert die konkrete Information und passt zu fast jedem beliebigen Thema.
+- Fix: Streichen Sie die Floskel und nennen Sie die konkrete Information, das Ergebnis oder den nächsten Schritt.
+- Flagged: `es ist wichtig zu beachten, dass.`, `es sollte hervorgehoben werden, dass.`
+- Not flagged: `Wir haben den Anmeldefehler behoben.`, `Die Datei ist zwei Megabyte groß.`, `Das Modell arbeitet ohne Netzwerk.`
+
+### hedge/pt-worth-noting
+
+é importante ressaltar que. Default: `warning`.
+
+- Why: Esta fórmula genérica adia a informação concreta e poderia aparecer em textos sobre qualquer assunto.
+- Fix: Remova a fórmula e apresente o dado, o resultado ou a ação concreta.
+- Flagged: `é importante ressaltar que.`, `vale a pena destacar que.`
+- Not flagged: `Corrigimos o erro de acesso hoje.`, `O arquivo ocupa dois megabytes.`, `O modelo funciona sem conexão.`
+
 ## Closers
 
 Template endings, summaries and calls for engagement.
@@ -371,6 +614,168 @@ Template endings, summaries and calls for engagement.
 - Flagged: `The possibilities are endless.`, `This is just the beginning.`, `The future of testing is here.`
 - Not flagged: `The future API will add pagination.`, `Possibilities include caching and batching.`, `We start at the beginning of the file.`
 
+### closer/tr-template-ending
+
+İçeriğe katkı yapmayan kapanış. Default: `warning`.
+
+- Why: İçeriğe katkı yapmayan kapanış. Bu ifade, somut bilgi yerine hazır bir anlatım kalıbı kullanıyor.
+- Fix: Kalıbı kaldırın; yerine somut bilgiyi, sonucu veya yapılacak işi yazın.
+- Flagged: `Sonuç olarak söylemek gerekirse, seçim sizin.`, `Umarım bu bilgiler faydalı olmuştur.`
+- Not flagged: `Sonuç dosyasını kaydedin.`, `Yarın saat onda görüşürüz.`, `Kurulum için komutu çalıştırın.`
+
+### closer/tr-engagement-bait
+
+Genel etkileşim çağrısı. Default: `warning`.
+
+- Why: Genel etkileşim çağrısı. Bu ifade, somut bilgi yerine hazır bir anlatım kalıbı kullanıyor.
+- Fix: Kalıbı kaldırın; yerine somut bilgiyi, sonucu veya yapılacak işi yazın.
+- Flagged: `Düşüncelerinizi yorumlarda paylaşın!`, `Siz bu konuda ne düşünüyorsunuz?`
+- Not flagged: `Hata raporuna sürüm numarasını ekleyin.`, `Yorumlarda üç hata bildirildi.`, `Bu konuda yarın karar vereceğiz.`
+
+### closer/it-template-ending
+
+spero che queste informazioni ti siano state utili. Default: `warning`.
+
+- Why: Questa formula generica ritarda i fatti e potrebbe comparire in un testo su qualsiasi argomento.
+- Fix: Elimina la formula e indica il fatto, il risultato o la prossima azione concreta.
+- Flagged: `spero che queste informazioni ti siano state utili.`, `spero che queste informazioni vi siano state utili.`
+- Not flagged: `Abbiamo corretto il problema di accesso.`, `Il file occupa due megabyte.`, `Il modello funziona senza rete.`
+
+### closer/it-engagement-bait
+
+condividi i tuoi pensieri nei commenti. Default: `warning`.
+
+- Why: Questa formula generica ritarda i fatti e potrebbe comparire in un testo su qualsiasi argomento.
+- Fix: Elimina la formula e indica il fatto, il risultato o la prossima azione concreta.
+- Flagged: `condividi i tuoi pensieri nei commenti.`, `facci sapere cosa ne pensi nei commenti.`
+- Not flagged: `Abbiamo corretto il problema di accesso.`, `Il file occupa due megabyte.`, `Il modello funziona senza rete.`
+
+### closer/nl-template-ending
+
+ik hoop dat deze informatie nuttig voor je was. Default: `warning`.
+
+- Why: Deze algemene formulering stelt concrete informatie uit en past bij vrijwel ieder onderwerp.
+- Fix: Schrap de formulering en noem het concrete feit, resultaat of de volgende stap.
+- Flagged: `ik hoop dat deze informatie nuttig voor je was.`, `ik hoop dat deze informatie u heeft geholpen.`
+- Not flagged: `We hebben de inlogfout verholpen.`, `Het bestand is twee megabyte groot.`, `Het model werkt zonder netwerk.`
+
+### closer/nl-engagement-bait
+
+deel je gedachten in de reacties. Default: `warning`.
+
+- Why: Deze algemene formulering stelt concrete informatie uit en past bij vrijwel ieder onderwerp.
+- Fix: Schrap de formulering en noem het concrete feit, resultaat of de volgende stap.
+- Flagged: `deel je gedachten in de reacties.`, `laat je mening achter in de reacties.`
+- Not flagged: `We hebben de inlogfout verholpen.`, `Het bestand is twee megabyte groot.`, `Het model werkt zonder netwerk.`
+
+### closer/ru-template-ending
+
+надеюсь, эта информация была вам полезна. Default: `warning`.
+
+- Why: Этот шаблонный оборот откладывает конкретную информацию и подходит почти к любой теме.
+- Fix: Уберите шаблон и укажите конкретный факт, результат или следующее действие.
+- Flagged: `надеюсь, эта информация была вам полезна.`, `надеюсь, эта информация оказалась полезной.`
+- Not flagged: `Мы исправили ошибку входа.`, `Размер файла — два мегабайта.`, `Модель работает без сети.`
+
+### closer/ru-engagement-bait
+
+поделитесь своими мыслями в комментариях. Default: `warning`.
+
+- Why: Этот шаблонный оборот откладывает конкретную информацию и подходит почти к любой теме.
+- Fix: Уберите шаблон и укажите конкретный факт, результат или следующее действие.
+- Flagged: `поделитесь своими мыслями в комментариях.`, `напишите своё мнение в комментариях.`
+- Not flagged: `Мы исправили ошибку входа.`, `Размер файла — два мегабайта.`, `Модель работает без сети.`
+
+### closer/ar-template-ending
+
+آمل أن تكون هذه المعلومات مفيدة لك. Default: `warning`.
+
+- Why: هذه عبارة عامة تؤخر المعلومة المحددة ويمكن استخدامها في نص عن أي موضوع تقريبا.
+- Fix: احذف العبارة واذكر المعلومة المحددة أو النتيجة أو الخطوة التالية.
+- Flagged: `آمل أن تكون هذه المعلومات مفيدة لك.`, `أتمنى أن تكون هذه المعلومات قد أفادتك.`
+- Not flagged: `أصلحنا خطأ تسجيل الدخول.`, `حجم الملف اثنان ميغابايت.`, `يعمل النموذج دون اتصال بالشبكة.`
+
+### closer/ar-engagement-bait
+
+شاركنا أفكارك في التعليقات. Default: `warning`.
+
+- Why: هذه عبارة عامة تؤخر المعلومة المحددة ويمكن استخدامها في نص عن أي موضوع تقريبا.
+- Fix: احذف العبارة واذكر المعلومة المحددة أو النتيجة أو الخطوة التالية.
+- Flagged: `شاركنا أفكارك في التعليقات.`, `شاركنا رأيك في التعليقات.`
+- Not flagged: `أصلحنا خطأ تسجيل الدخول.`, `حجم الملف اثنان ميغابايت.`, `يعمل النموذج دون اتصال بالشبكة.`
+
+### closer/es-template-ending
+
+espero que esta información te haya sido útil. Default: `warning`.
+
+- Why: Esta fórmula genérica retrasa la información concreta y puede aparecer en textos sobre cualquier tema.
+- Fix: Elimina la fórmula y escribe el dato, el resultado o la acción concreta.
+- Flagged: `espero que esta información te haya sido útil.`, `espero que esta información le haya sido útil.`
+- Not flagged: `Hoy corregimos el error de acceso.`, `El archivo ocupa dos megabytes.`, `El modelo funciona sin conexión.`
+
+### closer/es-engagement-bait
+
+comparte tus pensamientos en los comentarios. Default: `warning`.
+
+- Why: Esta fórmula genérica retrasa la información concreta y puede aparecer en textos sobre cualquier tema.
+- Fix: Elimina la fórmula y escribe el dato, el resultado o la acción concreta.
+- Flagged: `comparte tus pensamientos en los comentarios.`, `déjanos tu opinión en los comentarios.`
+- Not flagged: `Hoy corregimos el error de acceso.`, `El archivo ocupa dos megabytes.`, `El modelo funciona sin conexión.`
+
+### closer/fr-template-ending
+
+j'espère que ces informations vous seront utiles. Default: `warning`.
+
+- Why: Cette formule générique retarde les faits et pourrait figurer dans un texte sur presque tous les sujets.
+- Fix: Supprimez la formule et indiquez le fait, le résultat ou la prochaine action.
+- Flagged: `j'espère que ces informations vous seront utiles.`, `j'espère que cela vous a été utile.`
+- Not flagged: `Nous avons corrigé l’erreur de connexion.`, `Le fichier mesure deux mégaoctets.`, `Le modèle fonctionne sans connexion.`
+
+### closer/fr-engagement-bait
+
+partagez vos réflexions dans les commentaires. Default: `warning`.
+
+- Why: Cette formule générique retarde les faits et pourrait figurer dans un texte sur presque tous les sujets.
+- Fix: Supprimez la formule et indiquez le fait, le résultat ou la prochaine action.
+- Flagged: `partagez vos réflexions dans les commentaires.`, `partagez votre avis dans les commentaires.`
+- Not flagged: `Nous avons corrigé l’erreur de connexion.`, `Le fichier mesure deux mégaoctets.`, `Le modèle fonctionne sans connexion.`
+
+### closer/de-template-ending
+
+ich hoffe, diese Informationen waren hilfreich. Default: `warning`.
+
+- Why: Diese allgemeine Floskel verzögert die konkrete Information und passt zu fast jedem beliebigen Thema.
+- Fix: Streichen Sie die Floskel und nennen Sie die konkrete Information, das Ergebnis oder den nächsten Schritt.
+- Flagged: `ich hoffe, diese Informationen waren hilfreich.`, `ich hoffe, diese Informationen helfen Ihnen weiter.`
+- Not flagged: `Wir haben den Anmeldefehler behoben.`, `Die Datei ist zwei Megabyte groß.`, `Das Modell arbeitet ohne Netzwerk.`
+
+### closer/de-engagement-bait
+
+teilen Sie Ihre Gedanken in den Kommentaren. Default: `warning`.
+
+- Why: Diese allgemeine Floskel verzögert die konkrete Information und passt zu fast jedem beliebigen Thema.
+- Fix: Streichen Sie die Floskel und nennen Sie die konkrete Information, das Ergebnis oder den nächsten Schritt.
+- Flagged: `teilen Sie Ihre Gedanken in den Kommentaren.`, `hinterlassen Sie Ihre Meinung in den Kommentaren.`
+- Not flagged: `Wir haben den Anmeldefehler behoben.`, `Die Datei ist zwei Megabyte groß.`, `Das Modell arbeitet ohne Netzwerk.`
+
+### closer/pt-template-ending
+
+espero que estas informações tenham sido úteis. Default: `warning`.
+
+- Why: Esta fórmula genérica adia a informação concreta e poderia aparecer em textos sobre qualquer assunto.
+- Fix: Remova a fórmula e apresente o dado, o resultado ou a ação concreta.
+- Flagged: `espero que estas informações tenham sido úteis.`, `espero que essas informações tenham sido úteis.`
+- Not flagged: `Corrigimos o erro de acesso hoje.`, `O arquivo ocupa dois megabytes.`, `O modelo funciona sem conexão.`
+
+### closer/pt-engagement-bait
+
+compartilhe seus pensamentos nos comentários. Default: `warning`.
+
+- Why: Esta fórmula genérica adia a informação concreta e poderia aparecer em textos sobre qualquer assunto.
+- Fix: Remova a fórmula e apresente o dado, o resultado ou a ação concreta.
+- Flagged: `compartilhe seus pensamentos nos comentários.`, `partilhe a sua opinião nos comentários.`
+- Not flagged: `Corrigimos o erro de acesso hoje.`, `O arquivo ocupa dois megabytes.`, `O modelo funciona sem conexão.`
+
 ## Leftovers
 
 Assistant disclaimers and unfilled placeholders.
@@ -383,3 +788,84 @@ Leftover assistant text and placeholders. Default: `error`.
 - Fix: Delete the disclaimer. Fill in or remove every placeholder.
 - Flagged: `As an AI language model, I can't predict prices.`, `As of my last update, the API was in beta.`, `Best regards,⏎[Your Name]`, `Thanks for considering [Company Name].`
 - Not flagged: `As an AI researcher, she studies alignment.`, `Our AI model updates nightly.`, `See [the docs](https://example.com) for details.`, `- [x] Your name is set`
+
+### filler/tr-assistant-preamble
+
+Metinde kalmış asistan açıklaması. Default: `error`.
+
+- Why: Metinde kalmış asistan açıklaması. Bu ifade, somut bilgi yerine hazır bir anlatım kalıbı kullanıyor.
+- Fix: Kalıbı kaldırın; yerine somut bilgiyi, sonucu veya yapılacak işi yazın.
+- Flagged: `Bir yapay zekâ modeli olarak bunu yapamam.`, `İşte sizin için hazırladığım metin:`
+- Not flagged: `Yapay zekâ modeli diskte çalışır.`, `Metni dün hazırladım.`, `Modelin bellek kullanımı ölçüldü.`
+
+### filler/it-assistant-preamble
+
+come modello linguistico di intelligenza artificiale. Default: `error`.
+
+- Why: Questa formula generica ritarda i fatti e potrebbe comparire in un testo su qualsiasi argomento.
+- Fix: Elimina la formula e indica il fatto, il risultato o la prossima azione concreta.
+- Flagged: `come modello linguistico di intelligenza artificiale.`, `in quanto modello linguistico di IA.`
+- Not flagged: `Abbiamo corretto il problema di accesso.`, `Il file occupa due megabyte.`, `Il modello funziona senza rete.`
+
+### filler/nl-assistant-preamble
+
+als AI-taalmodel kan ik. Default: `error`.
+
+- Why: Deze algemene formulering stelt concrete informatie uit en past bij vrijwel ieder onderwerp.
+- Fix: Schrap de formulering en noem het concrete feit, resultaat of de volgende stap.
+- Flagged: `als AI-taalmodel kan ik.`, `als kunstmatig taalmodel kan ik.`
+- Not flagged: `We hebben de inlogfout verholpen.`, `Het bestand is twee megabyte groot.`, `Het model werkt zonder netwerk.`
+
+### filler/ru-assistant-preamble
+
+как языковая модель искусственного интеллекта. Default: `error`.
+
+- Why: Этот шаблонный оборот откладывает конкретную информацию и подходит почти к любой теме.
+- Fix: Уберите шаблон и укажите конкретный факт, результат или следующее действие.
+- Flagged: `как языковая модель искусственного интеллекта.`, `как большая языковая модель я.`
+- Not flagged: `Мы исправили ошибку входа.`, `Размер файла — два мегабайта.`, `Модель работает без сети.`
+
+### filler/ar-assistant-preamble
+
+بصفتي نموذج لغة للذكاء الاصطناعي. Default: `error`.
+
+- Why: هذه عبارة عامة تؤخر المعلومة المحددة ويمكن استخدامها في نص عن أي موضوع تقريبا.
+- Fix: احذف العبارة واذكر المعلومة المحددة أو النتيجة أو الخطوة التالية.
+- Flagged: `بصفتي نموذج لغة للذكاء الاصطناعي.`, `كنموذج لغوي للذكاء الاصطناعي.`
+- Not flagged: `أصلحنا خطأ تسجيل الدخول.`, `حجم الملف اثنان ميغابايت.`, `يعمل النموذج دون اتصال بالشبكة.`
+
+### filler/es-assistant-preamble
+
+como modelo de lenguaje de inteligencia artificial. Default: `error`.
+
+- Why: Esta fórmula genérica retrasa la información concreta y puede aparecer en textos sobre cualquier tema.
+- Fix: Elimina la fórmula y escribe el dato, el resultado o la acción concreta.
+- Flagged: `como modelo de lenguaje de inteligencia artificial.`, `como modelo de lenguaje de IA.`
+- Not flagged: `Hoy corregimos el error de acceso.`, `El archivo ocupa dos megabytes.`, `El modelo funciona sin conexión.`
+
+### filler/fr-assistant-preamble
+
+en tant que modèle de langage d'intelligence artificielle. Default: `error`.
+
+- Why: Cette formule générique retarde les faits et pourrait figurer dans un texte sur presque tous les sujets.
+- Fix: Supprimez la formule et indiquez le fait, le résultat ou la prochaine action.
+- Flagged: `en tant que modèle de langage d'intelligence artificielle.`, `en tant que modèle de langage IA.`
+- Not flagged: `Nous avons corrigé l’erreur de connexion.`, `Le fichier mesure deux mégaoctets.`, `Le modèle fonctionne sans connexion.`
+
+### filler/de-assistant-preamble
+
+als KI-Sprachmodell. Default: `error`.
+
+- Why: Diese allgemeine Floskel verzögert die konkrete Information und passt zu fast jedem beliebigen Thema.
+- Fix: Streichen Sie die Floskel und nennen Sie die konkrete Information, das Ergebnis oder den nächsten Schritt.
+- Flagged: `als KI-Sprachmodell.`, `als künstliches Sprachmodell.`
+- Not flagged: `Wir haben den Anmeldefehler behoben.`, `Die Datei ist zwei Megabyte groß.`, `Das Modell arbeitet ohne Netzwerk.`
+
+### filler/pt-assistant-preamble
+
+como modelo de linguagem de inteligência artificial. Default: `error`.
+
+- Why: Esta fórmula genérica adia a informação concreta e poderia aparecer em textos sobre qualquer assunto.
+- Fix: Remova a fórmula e apresente o dado, o resultado ou a ação concreta.
+- Flagged: `como modelo de linguagem de inteligência artificial.`, `como um modelo de linguagem de IA.`
+- Not flagged: `Corrigimos o erro de acesso hoje.`, `O arquivo ocupa dois megabytes.`, `O modelo funciona sem conexão.`
