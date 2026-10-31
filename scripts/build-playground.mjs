@@ -30,6 +30,8 @@ await build({
 for (const file of ['index.html', 'styles.css']) {
   copyFileSync(join(root, 'playground', file), join(out, file));
 }
+// og:image / twitter:image in index.html point here.
+copyFileSync(join(root, 'docs/images/social-preview.png'), join(out, 'social-preview.png'));
 // Serve files as-is, without Jekyll processing.
 writeFileSync(join(out, '.nojekyll'), '');
 
