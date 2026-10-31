@@ -241,7 +241,7 @@ Five generated texts and their rewrites live in [`examples/`](examples). CI chec
 ## Programmatic use
 
 ```ts
-import { lint } from 'sloplint';
+import { lint } from '@kcgdz/sloplint';
 
 const { score, label, findings } = lint(text, {
   rules: { 'vocab/delve': 'error' },
