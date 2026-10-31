@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Try a text in the playground
+    url: https://kcgdz.github.io/sloplint/
+    about: Check a sample before filing a pattern or false-positive report.

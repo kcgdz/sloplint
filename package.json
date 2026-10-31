@@ -1,0 +1,80 @@
+{
+  "name": "sloplint",
+  "version": "0.1.0",
+  "description": "Catch the phrases that make writing read like unedited AI output. Offline, deterministic, with a shareable slop score.",
+  "license": "MIT",
+  "author": "kcgdz",
+  "homepage": "https://github.com/kcgdz/sloplint#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kcgdz/sloplint.git"
+  },
+  "bugs": "https://github.com/kcgdz/sloplint/issues",
+  "keywords": [
+    "lint",
+    "linter",
+    "prose",
+    "writing",
+    "ai",
+    "slop",
+    "markdown",
+    "cli",
+    "claude-code",
+    "agent-skill"
+  ],
+  "type": "module",
+  "bin": {
+    "sloplint": "dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "build:playground": "node scripts/build-playground.mjs",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "gen-docs": "npm run build && node scripts/gen-docs.mjs",
+    "dogfood": "node dist/cli.js README.md CONTRIBUTING.md skills --max-score 15 --fail-on warning",
+    "prepublishOnly": "npm run build",
+    "docs:check": "node scripts/gen-docs.mjs --check",
+    "images": "npm run build && node scripts/render-images.mjs"
+  },
+  "dependencies": {
+    "picocolors": "^1.1.1",
+    "tinyglobby": "^0.2.17"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.6",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.14.0",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "tsup": "^9.0.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vitest": "^5.0.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

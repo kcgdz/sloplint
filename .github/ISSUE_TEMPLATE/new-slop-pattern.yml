@@ -1,0 +1,88 @@
+name: Propose a slop pattern
+description: A phrase or shape you keep seeing in generated text that sloplint misses.
+title: '[pattern] '
+labels: ['pattern', 'triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! The best proposals come with real examples and with look-alikes that should **not** be flagged. False positives are the main reason people turn a linter off, so the second box matters as much as the first.
+
+        Search the [rule list](https://github.com/kcgdz/sloplint#what-it-checks) first; your pattern might already be covered or fit an existing rule.
+  - type: input
+    id: pattern
+    attributes:
+      label: Pattern
+      description: The phrase or shape, as short as possible.
+      placeholder: '"Let that sink in."'
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - opener (stock first lines)
+        - vocab (words and phrases)
+        - structure (sentence or paragraph shapes)
+        - format (punctuation, emoji, emphasis)
+        - hedge (qualifiers)
+        - closer (endings, calls to action)
+        - filler (assistant leftovers, placeholders)
+        - not sure
+    validations:
+      required: true
+  - type: checkboxes
+    id: where
+    attributes:
+      label: Where do you see it?
+      options:
+        - label: READMEs and docs
+        - label: Landing pages and product copy
+        - label: Social posts and threads
+        - label: Emails
+        - label: Commit messages and PRs
+        - label: Blog posts
+  - type: textarea
+    id: bad
+    attributes:
+      label: Examples that should be flagged
+      description: Two or more real sentences. Links to where you found them help.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: good
+    attributes:
+      label: Look-alikes that should NOT be flagged
+      description: Ordinary or technical sentences that use the same words. Try hard here; this is where rules go wrong.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does it read as slop?
+      description: One or two sentences. This becomes the explanation users see.
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: Suggested fix
+      description: What should a writer do instead?
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Suggested severity
+      options:
+        - warning (almost always slop)
+        - info (only a problem when frequent)
+        - error (should never be published)
+        - not sure
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Contribution
+      options:
+        - label: I'd like to open the pull request myself (see CONTRIBUTING.md)

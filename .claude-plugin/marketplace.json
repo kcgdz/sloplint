@@ -1,0 +1,16 @@
+{
+  "name": "sloplint",
+  "owner": {
+    "name": "kcgdz",
+    "url": "https://github.com/kcgdz"
+  },
+  "description": "The sloplint Agent Skill: write prose without AI-slop patterns.",
+  "plugins": [
+    {
+      "name": "sloplint",
+      "source": "./",
+      "description": "Keeps AI-slop patterns out of READMEs, landing pages, social posts, commit messages, blog posts and emails.",
+      "category": "writing"
+    }
+  ]
+}

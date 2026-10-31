@@ -1,0 +1,14 @@
+{
+  "name": "sloplint",
+  "displayName": "sloplint",
+  "version": "0.1.0",
+  "description": "Writing guidance that keeps AI-slop patterns out of READMEs, landing pages, social posts, commit messages, blog posts and emails, with a CLI self-check.",
+  "author": {
+    "name": "kcgdz",
+    "url": "https://github.com/kcgdz"
+  },
+  "homepage": "https://github.com/kcgdz/sloplint",
+  "repository": "https://github.com/kcgdz/sloplint",
+  "license": "MIT",
+  "keywords": ["writing", "prose", "lint", "slop", "readme", "copywriting", "commit-messages"]
+}

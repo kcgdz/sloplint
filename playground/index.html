@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>sloplint playground</title>
+    <meta
+      name="description"
+      content="Paste a draft and see which phrases read like unedited AI output. Runs in your browser; nothing is uploaded."
+    />
+    <meta property="og:title" content="sloplint playground" />
+    <meta
+      property="og:description"
+      content="Paste a draft and get a slop score from 0 to 100, with every flagged phrase highlighted."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="color-scheme" content="light dark" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='9' width='26' height='14' rx='3' fill='%23FFE45C'/%3E%3Crect x='3' y='9' width='26' height='14' rx='3' fill='none' stroke='%2318202B' stroke-width='2'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="masthead">
+      <a class="wordmark" href="./"><span class="wordmark-mark">slop</span>lint</a>
+      <nav class="masthead-links" aria-label="Project">
+        <a href="https://github.com/kcgdz/sloplint">GitHub</a>
+        <a href="https://github.com/kcgdz/sloplint#what-it-checks">Rules</a>
+        <a href="https://www.npmjs.com/package/sloplint">npm</a>
+      </nav>
+    </header>
+
+    <main class="desk">
+      <section class="draft" aria-labelledby="draft-title">
+        <div class="draft-intro">
+          <h1 id="draft-title">Paste a draft. See what reads like AI slop.</h1>
+          <p>
+            The same <span id="rule-count">39</span> rules as the sloplint CLI, running in your
+            browser. Your text is not uploaded anywhere.
+          </p>
+        </div>
+
+        <div class="draft-tools">
+          <label class="example-picker">
+            <span>Load an example</span>
+            <select id="example">
+              <option value="">Choose…</option>
+            </select>
+          </label>
+          <button type="button" id="clear" class="quiet-button">Clear</button>
+        </div>
+
+        <div class="sheet">
+          <div class="editor">
+            <div id="backdrop" class="editor-layer editor-backdrop" aria-hidden="true"></div>
+            <textarea
+              id="input"
+              class="editor-layer editor-input"
+              spellcheck="false"
+              aria-label="Text to check"
+              aria-describedby="draft-hint"
+              placeholder="Paste a README, a post, an email or a commit message."
+            ></textarea>
+          </div>
+        </div>
+        <p id="draft-hint" class="draft-hint">
+          Click a highlighted phrase to see why it was flagged. Code blocks, quotes and links are
+          skipped, just like in the CLI.
+        </p>
+      </section>
+
+      <aside class="verdict" aria-labelledby="verdict-title">
+        <h2 id="verdict-title" class="visually-hidden">Result</h2>
+        <div class="score" id="score" data-band="empty" aria-live="polite">
+          <p class="score-number">
+            <span id="score-value">0</span><span class="score-max">/100</span>
+          </p>
+          <p class="score-label" id="score-label">Waiting for text</p>
+          <div class="bands" aria-hidden="true">
+            <span class="band band-human"></span>
+            <span class="band band-light"></span>
+            <span class="band band-sloppy"></span>
+            <span class="band band-pure"></span>
+            <span class="band-marker" id="band-marker"></span>
+          </div>
+          <p class="score-meta" id="score-meta"></p>
+        </div>
+
+        <div class="share">
+          <a id="share-x" class="button button-primary" target="_blank" rel="noopener"
+            >Share on X</a
+          >
+          <button type="button" id="copy-link" class="button">Copy link to this text</button>
+        </div>
+
+        <div class="findings">
+          <h3 class="findings-title" id="findings-title">Findings</h3>
+          <ol id="findings" class="findings-list" aria-labelledby="findings-title"></ol>
+          <p id="findings-empty" class="findings-empty" hidden></p>
+        </div>
+      </aside>
+    </main>
+
+    <a class="score-pill" id="score-pill" href="#score" hidden>
+      <strong id="pill-value">0</strong><span id="pill-label">Waiting for text</span>
+    </a>
+
+    <footer class="colophon">
+      <p>
+        Run it on your own files with <code>npx sloplint README.md</code>, or add the Claude Code
+        skill so drafts come out clean. Scores are deterministic: the same text always gets the same
+        number.
+      </p>
+      <p>
+        MIT licensed.
+        <a href="https://github.com/kcgdz/sloplint/issues/new?template=new-slop-pattern.yml"
+          >Suggest a pattern</a
+        >
+        or
+        <a href="https://github.com/kcgdz/sloplint/issues/new?template=false-positive.yml"
+          >report a false positive</a
+        >.
+      </p>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

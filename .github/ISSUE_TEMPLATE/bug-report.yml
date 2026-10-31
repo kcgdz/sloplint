@@ -1,0 +1,28 @@
+name: Bug report
+description: The CLI, config, output or playground does something wrong.
+title: '[bug] '
+labels: ['bug', 'triage']
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Include the command, the input, and the output or error.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: sloplint version
+      placeholder: output of `npx sloplint --version`
+  - type: input
+    id: env
+    attributes:
+      label: Node version and OS
+      placeholder: Node 24.1, Ubuntu 24.04

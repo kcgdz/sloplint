@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Smoke test the CLI
+        run: |
+          node dist/cli.js --version
+          node dist/cli.js examples/readme/after.md --max-score 15
+          if node dist/cli.js examples/readme/before.md --max-score 70; then
+            echo "expected before.md to fail the threshold"; exit 1
+          fi
+      - name: Generated docs are up to date
+        run: npm run docs:check
+      - name: Lint our own prose
+        run: node dist/cli.js README.md CONTRIBUTING.md skills --format github --max-score 15 --fail-on warning
+      - name: Playground builds
+        run: npm run build:playground
