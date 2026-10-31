@@ -175,7 +175,7 @@ shoot(
       ${panel('Generated README', beforeFile, beforeExcerpt)}
       ${panel('After the sloplint skill', afterFile, afterExcerpt)}
     </div>
-    <footer><span><b><span class="hl">slop</span>lint</b>&nbsp;&nbsp;scores are for the full files in examples/readme</span><span>npx sloplint README.md</span></footer>`,
+    <footer><span><b><span class="hl">slop</span>lint</b>&nbsp;&nbsp;scores are for the full files in examples/readme</span><span>npx @kcgdz/sloplint README.md</span></footer>`,
   ),
 );
 
@@ -209,7 +209,7 @@ shoot(
     `<div class="brand">
       <h1><span class="hl">slop</span>lint</h1>
       <p>Catch the phrases that make writing read like AI output.</p>
-      <code>npx sloplint README.md</code>
+      <code>npx @kcgdz/sloplint README.md</code>
     </div>
     <div class="sheet card">
       <div class="score"><span class="num">${sampleResult.score}</span><span class="max">/100</span><span class="label">${sampleResult.label}</span></div>

@@ -5,7 +5,7 @@ Catch the phrases that make writing read like unedited AI output, before your re
 ![A generated README with highlighted phrases scores 100/100, Pure slop. The rewrite after the sloplint skill scores 0/100, Human.](https://raw.githubusercontent.com/kcgdz/sloplint/main/docs/images/before-after.png)
 
 [![CI](https://github.com/kcgdz/sloplint/actions/workflows/ci.yml/badge.svg)](https://github.com/kcgdz/sloplint/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/sloplint)](https://www.npmjs.com/package/sloplint)
+[![npm](https://img.shields.io/npm/v/@kcgdz/sloplint)](https://www.npmjs.com/package/@kcgdz/sloplint)
 [![slop score](https://img.shields.io/badge/slop%20score-0%2F100%20Human-brightgreen)](#slop-score)
 
 **Try it in the browser:** [kcgdz.github.io/sloplint](https://kcgdz.github.io/sloplint/)
@@ -23,7 +23,7 @@ The same README after a rewrite with the sloplint skill ([full file](examples/re
 > Shrinkray resizes and compresses a folder of images from the command line. On a 2021 MacBook Air it turns 1,000 phone photos (4.1 GB) into 1200px-wide JPEGs (310 MB) in about 40 seconds.
 
 ```console
-$ npx sloplint examples/readme/before.md
+$ npx @kcgdz/sloplint examples/readme/before.md
 examples/readme/before.md  slop score 100/100 Pure slop
   ...
   5:1     warning  "In today's fast-paced world"  opener/fast-paced-world
@@ -38,7 +38,7 @@ examples/readme/before.md  slop score 100/100 Pure slop
 54 findings (0 errors, 47 warnings, 7 info) in 1 file, 243 words.
 Slop score: 100/100 (Pure slop)
 
-$ npx sloplint examples/readme/after.md
+$ npx @kcgdz/sloplint examples/readme/after.md
 examples/readme/after.md  slop score 0/100 Human
   no findings
 
@@ -51,7 +51,7 @@ Slop score: 0/100 (Human)
 Lint a file, no install needed (Node 22+):
 
 ```bash
-npx sloplint README.md
+npx @kcgdz/sloplint README.md
 ```
 
 Teach Claude Code to avoid the patterns while it writes, by adding the plugin from inside Claude Code:
@@ -164,7 +164,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npx sloplint README.md docs --format github --max-score 30
+      - run: npx @kcgdz/sloplint README.md docs --format github --max-score 30
 ```
 
 Findings show up as annotations on the pull request diff.
