@@ -46,13 +46,13 @@ Read the guide for the kind of text you are writing before you draft it. Load on
 If you have a shell, lint the file after writing it:
 
 ```bash
-npx -y sloplint path/to/file.md
+npx -y @kcgdz/sloplint path/to/file.md
 ```
 
 For text that isn't in a file yet (a commit message or a post), pipe it in:
 
 ```bash
-printf '%s\n' "$DRAFT" | npx -y sloplint --stdin
+printf '%s\n' "$DRAFT" | npx -y @kcgdz/sloplint --stdin
 ```
 
 Fix every `error` and `warning`. Treat `info` findings as prompts to reread the sentence; keep the wording when it is the right word. Aim for a slop score under 15. Rerun until it passes, then tell the user the final score.

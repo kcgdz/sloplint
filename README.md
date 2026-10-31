@@ -54,21 +54,100 @@ Lint a file, no install needed (Node 22+):
 npx @kcgdz/sloplint README.md
 ```
 
-Teach Claude Code to avoid the patterns while it writes, by adding the plugin from inside Claude Code:
+Use the [CLI in your project](#integrate-into-your-project) to check existing files, or [install the Claude Code skill](#install-as-a-claude-code-skill) to guide Claude while it writes. They work independently; installing the skill does not install the npm package.
+
+## Integrate into your project
+
+Requires Node.js 22 or newer. Run this in the project that contains your docs:
+
+```bash
+npm install --save-dev @kcgdz/sloplint
+```
+
+Add a script to your existing `package.json` (keep your other scripts):
+
+```json
+{
+  "scripts": {
+    "lint:prose": "sloplint README.md docs/ --max-score 30 --fail-on warning"
+  }
+}
+```
+
+Replace `README.md docs/` with files or folders that exist in your project. Then run:
+
+```bash
+npm run lint:prose
+```
+
+The command reports matching phrases, their locations and rewrite advice. With these flags it exits with code 1 if a file scores above 30 or has a warning or error; `info` findings alone do not fail the severity check. Adjust the limits in [Configuration](#configuration), and commit `package.json` and your lockfile so collaborators use the same version.
+
+For pull request checks, use the [GitHub Actions example](#in-ci). To call the engine from your own application, use the [JavaScript API](#programmatic-use).
+
+## Install as a Claude Code skill
+
+The skill gives Claude writing guidance and examples. The CLI checks the resulting text with deterministic rules. Use either on its own, or both together.
+
+### Option 1: Install the plugin
+
+Start Claude Code in your project. Run these commands **inside Claude Code**, not in your terminal:
 
 ```text
 /plugin marketplace add kcgdz/sloplint
 /plugin install sloplint@sloplint
 ```
 
-Or copy the skill folder by hand:
+In the plugin panel, choose a scope: user for all your projects, project for a shared repository setup, or local for just you in the current repository. Finish the installation and check that sloplint appears in `/plugin`. See the [Claude Code plugin installation guide](https://code.claude.com/docs/en/discover-plugins).
 
-```bash
-git clone --depth 1 https://github.com/kcgdz/sloplint
-cp -r sloplint/skills/sloplint ~/.claude/skills/
+Ask Claude to use the skill, for example:
+
+```text
+Use the sloplint skill to rewrite README.md. Keep the facts and examples,
+remove stock phrases, then check the result with the sloplint CLI.
 ```
 
-The skill loads when Claude writes a README, landing page, post, commit message or email. It reads a type-specific guide only for the kind of text at hand, then checks the draft with the CLI when a shell is available.
+### Option 2: Copy the skill into your project
+
+Copy the **whole** `skills/sloplint` directory, including `references/`, into `.claude/skills/sloplint` in your project. The resulting structure should be:
+
+```text
+your-project/
+  .claude/
+    skills/
+      sloplint/
+        SKILL.md
+        references/
+```
+
+For macOS, Linux or Git Bash, run these commands from your project root. Use a fresh checkout directory if `sloplint-source` already exists:
+
+```bash
+git clone --depth 1 https://github.com/kcgdz/sloplint sloplint-source
+mkdir -p .claude/skills
+cp -R sloplint-source/skills/sloplint .claude/skills/
+```
+
+For Windows PowerShell:
+
+```powershell
+git clone --depth 1 https://github.com/kcgdz/sloplint sloplint-source
+New-Item -ItemType Directory -Force .claude/skills | Out-Null
+Copy-Item -Recurse sloplint-source/skills/sloplint .claude/skills/
+```
+
+Keep the checkout outside version control, or remove it after copying; only `.claude/skills/sloplint/` belongs in your project commit. For a personal installation across all projects, use `~/.claude/skills/sloplint/` instead (`$HOME/.claude/skills/sloplint/` in PowerShell). Choose the plugin or the copied skill to avoid duplicate installations. See [Claude Code skill locations](https://code.claude.com/docs/en/skills#choose-where-skills-load).
+
+Open Claude Code in the target project and run `/sloplint` for a copied skill. Claude can also load it when the writing task matches its description. For plugin installs, use `/plugin` to inspect the installed skill's command name. Ask it to review a README or draft, keep the facts, and explain the changes.
+
+### Enable the CLI check
+
+The writing guidance works without Node.js. To run the automated check too, install the CLI as shown above or let Claude run this with Node.js 22+ and network access on the first download:
+
+```bash
+npx --yes @kcgdz/sloplint README.md
+```
+
+Without Node.js or access to the CLI, Claude can still review the draft using the skill's bundled references, but cannot produce a verified CLI score. Skill instructions depend on Claude following them; they are not a mandatory pre-commit check. Use CI when you need an enforced check.
 
 ## What it checks
 
@@ -222,6 +301,8 @@ Exit codes: `0` passed, `1` over a threshold, `2` usage or config error.
 
 ### In CI
 
+After adding the dev dependency and `lint:prose` script above, save this as `.github/workflows/prose.yml`. Commit your npm lockfile; `npm ci` installs its recorded versions.
+
 ```yaml
 # .github/workflows/prose.yml
 name: prose
@@ -234,7 +315,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npx @kcgdz/sloplint README.md docs --format github --max-score 30
+          cache: npm
+      - run: npm ci
+      - run: npm run lint:prose -- --format github
 ```
 
 Findings show up as annotations on the pull request diff.
@@ -310,15 +393,26 @@ Five generated texts and their rewrites live in [`examples/`](examples). CI chec
 
 ## Programmatic use
 
+For a Node.js application that calls sloplint at runtime, install it as a regular dependency:
+
+```bash
+npm install @kcgdz/sloplint
+```
+
+In an ES module (`.mjs`, or a project with `"type": "module"`):
+
 ```ts
 import { lint } from '@kcgdz/sloplint';
 
+const text = 'Your draft goes here.';
 const { score, label, findings } = lint(text, {
   rules: { 'vocab/delve': 'error' },
 });
+
+console.log({ score, label, findings });
 ```
 
-The core has no Node dependencies and runs in the browser; the [playground](https://kcgdz.github.io/sloplint/) uses the same engine.
+The API returns findings; it does not rewrite your text. Pass rule overrides directly to `lint()`; the core does not automatically read `.sloplintrc` files. The core has no Node dependencies and runs in the browser through a bundler; the [playground](https://kcgdz.github.io/sloplint/) uses the same engine.
 
 ## Contributing
 
